@@ -1,0 +1,50 @@
+﻿@model CrudMahasiswa.Models.Masterdata
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Masterdata</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Falkuta.Id_falkutas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Falkuta.Id_falkutas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jurusan.Id_jurusan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jurusan.Id_jurusan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mahasiswa.Id_mhs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mahasiswa.Id_mhs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Matakuliah.Nama_matakuliah)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Matakuliah.Nama_matakuliah)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MasterdataID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

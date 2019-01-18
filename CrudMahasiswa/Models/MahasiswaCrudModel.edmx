@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MahasiswaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Falkutas">
+          <Key>
+            <PropertyRef Name="FalkutasID" />
+          </Key>
+          <Property Name="FalkutasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_falkutas" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nama_falkutas" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Jurusan">
+          <Key>
+            <PropertyRef Name="JurusanID" />
+          </Key>
+          <Property Name="JurusanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_jurusan" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nama_Jurusan" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mahasiswa">
+          <Key>
+            <PropertyRef Name="MahasiswaID" />
+          </Key>
+          <Property Name="MahasiswaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_mhs" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nama_mhs" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_falkutas" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_jurusan" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Masterdata">
+          <Key>
+            <PropertyRef Name="MasterdataID" />
+          </Key>
+          <Property Name="MasterdataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MahasiswaID" Type="int" />
+          <Property Name="FalkutasID" Type="int" />
+          <Property Name="JurusanID" Type="int" />
+          <Property Name="MatakuliahID" Type="int" />
+        </EntityType>
+        <EntityType Name="Matakuliah">
+          <Key>
+            <PropertyRef Name="MatakuliahID" />
+          </Key>
+          <Property Name="MatakuliahID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama_matakuliah" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sks" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_dbo_Masterdata_dbo_Falkutas_FalkutasID">
+          <End Role="Falkutas" Type="Self.Falkutas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Falkutas">
+              <PropertyRef Name="FalkutasID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="FalkutasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Masterdata_dbo_Jurusan_JurusanID">
+          <End Role="Jurusan" Type="Self.Jurusan" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jurusan">
+              <PropertyRef Name="JurusanID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="JurusanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID">
+          <End Role="Mahasiswa" Type="Self.Mahasiswa" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mahasiswa">
+              <PropertyRef Name="MahasiswaID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="MahasiswaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID">
+          <End Role="Matakuliah" Type="Self.Matakuliah" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matakuliah">
+              <PropertyRef Name="MatakuliahID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="MatakuliahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MahasiswaDBModelStoreContainer">
+          <EntitySet Name="Falkutas" EntityType="Self.Falkutas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jurusan" EntityType="Self.Jurusan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mahasiswa" EntityType="Self.Mahasiswa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Masterdata" EntityType="Self.Masterdata" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matakuliah" EntityType="Self.Matakuliah" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Falkutas_FalkutasID" Association="Self.FK_dbo_Masterdata_dbo_Falkutas_FalkutasID">
+            <End Role="Falkutas" EntitySet="Falkutas" />
+            <End Role="Masterdata" EntitySet="Masterdata" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Jurusan_JurusanID" Association="Self.FK_dbo_Masterdata_dbo_Jurusan_JurusanID">
+            <End Role="Jurusan" EntitySet="Jurusan" />
+            <End Role="Masterdata" EntitySet="Masterdata" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID" Association="Self.FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID">
+            <End Role="Mahasiswa" EntitySet="Mahasiswa" />
+            <End Role="Masterdata" EntitySet="Masterdata" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID" Association="Self.FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID">
+            <End Role="Matakuliah" EntitySet="Matakuliah" />
+            <End Role="Masterdata" EntitySet="Masterdata" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MahasiswaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Falkuta">
+          <Key>
+            <PropertyRef Name="FalkutasID" />
+          </Key>
+          <Property Name="FalkutasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_falkutas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nama_falkutas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Falkutas_FalkutasID" FromRole="Falkutas" ToRole="Masterdata" />
+        </EntityType>
+        <EntityType Name="Jurusan">
+          <Key>
+            <PropertyRef Name="JurusanID" />
+          </Key>
+          <Property Name="JurusanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_jurusan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nama_Jurusan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Jurusan_JurusanID" FromRole="Jurusan" ToRole="Masterdata" />
+        </EntityType>
+        <EntityType Name="Mahasiswa">
+          <Key>
+            <PropertyRef Name="MahasiswaID" />
+          </Key>
+          <Property Name="MahasiswaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_mhs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nama_mhs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_falkutas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_jurusan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID" FromRole="Mahasiswa" ToRole="Masterdata" />
+        </EntityType>
+        <EntityType Name="Masterdata">
+          <Key>
+            <PropertyRef Name="MasterdataID" />
+          </Key>
+          <Property Name="MasterdataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MahasiswaID" Type="Int32" />
+          <Property Name="FalkutasID" Type="Int32" />
+          <Property Name="JurusanID" Type="Int32" />
+          <Property Name="MatakuliahID" Type="Int32" />
+          <NavigationProperty Name="Falkuta" Relationship="Self.FK_dbo_Masterdata_dbo_Falkutas_FalkutasID" FromRole="Masterdata" ToRole="Falkutas" />
+          <NavigationProperty Name="Jurusan" Relationship="Self.FK_dbo_Masterdata_dbo_Jurusan_JurusanID" FromRole="Masterdata" ToRole="Jurusan" />
+          <NavigationProperty Name="Mahasiswa" Relationship="Self.FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID" FromRole="Masterdata" ToRole="Mahasiswa" />
+          <NavigationProperty Name="Matakuliah" Relationship="Self.FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID" FromRole="Masterdata" ToRole="Matakuliah" />
+        </EntityType>
+        <EntityType Name="Matakuliah">
+          <Key>
+            <PropertyRef Name="MatakuliahID" />
+          </Key>
+          <Property Name="MatakuliahID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama_matakuliah" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID" FromRole="Matakuliah" ToRole="Masterdata" />
+        </EntityType>
+        <Association Name="FK_dbo_Masterdata_dbo_Falkutas_FalkutasID">
+          <End Role="Falkutas" Type="Self.Falkuta" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Falkutas">
+              <PropertyRef Name="FalkutasID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="FalkutasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Masterdata_dbo_Jurusan_JurusanID">
+          <End Role="Jurusan" Type="Self.Jurusan" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jurusan">
+              <PropertyRef Name="JurusanID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="JurusanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID">
+          <End Role="Mahasiswa" Type="Self.Mahasiswa" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mahasiswa">
+              <PropertyRef Name="MahasiswaID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="MahasiswaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID">
+          <End Role="Matakuliah" Type="Self.Matakuliah" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matakuliah">
+              <PropertyRef Name="MatakuliahID" />
+            </Principal>
+            <Dependent Role="Masterdata">
+              <PropertyRef Name="MatakuliahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MahasiswaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Falkutas" EntityType="Self.Falkuta" />
+          <EntitySet Name="Jurusans" EntityType="Self.Jurusan" />
+          <EntitySet Name="Mahasiswas" EntityType="Self.Mahasiswa" />
+          <EntitySet Name="Masterdatas" EntityType="Self.Masterdata" />
+          <EntitySet Name="Matakuliahs" EntityType="Self.Matakuliah" />
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Falkutas_FalkutasID" Association="Self.FK_dbo_Masterdata_dbo_Falkutas_FalkutasID">
+            <End Role="Falkutas" EntitySet="Falkutas" />
+            <End Role="Masterdata" EntitySet="Masterdatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Jurusan_JurusanID" Association="Self.FK_dbo_Masterdata_dbo_Jurusan_JurusanID">
+            <End Role="Jurusan" EntitySet="Jurusans" />
+            <End Role="Masterdata" EntitySet="Masterdatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID" Association="Self.FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID">
+            <End Role="Mahasiswa" EntitySet="Mahasiswas" />
+            <End Role="Masterdata" EntitySet="Masterdatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID" Association="Self.FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID">
+            <End Role="Matakuliah" EntitySet="Matakuliahs" />
+            <End Role="Masterdata" EntitySet="Masterdatas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MahasiswaDBModelStoreContainer" CdmEntityContainer="MahasiswaDBEntities">
+          <EntitySetMapping Name="Falkutas">
+            <EntityTypeMapping TypeName="MahasiswaDBModel.Falkuta">
+              <MappingFragment StoreEntitySet="Falkutas">
+                <ScalarProperty Name="FalkutasID" ColumnName="FalkutasID" />
+                <ScalarProperty Name="Id_falkutas" ColumnName="Id_falkutas" />
+                <ScalarProperty Name="Nama_falkutas" ColumnName="Nama_falkutas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jurusans">
+            <EntityTypeMapping TypeName="MahasiswaDBModel.Jurusan">
+              <MappingFragment StoreEntitySet="Jurusan">
+                <ScalarProperty Name="JurusanID" ColumnName="JurusanID" />
+                <ScalarProperty Name="Id_jurusan" ColumnName="Id_jurusan" />
+                <ScalarProperty Name="Nama_Jurusan" ColumnName="Nama_Jurusan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mahasiswas">
+            <EntityTypeMapping TypeName="MahasiswaDBModel.Mahasiswa">
+              <MappingFragment StoreEntitySet="Mahasiswa">
+                <ScalarProperty Name="MahasiswaID" ColumnName="MahasiswaID" />
+                <ScalarProperty Name="Id_mhs" ColumnName="Id_mhs" />
+                <ScalarProperty Name="Nama_mhs" ColumnName="Nama_mhs" />
+                <ScalarProperty Name="Id_falkutas" ColumnName="Id_falkutas" />
+                <ScalarProperty Name="Id_jurusan" ColumnName="Id_jurusan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Masterdatas">
+            <EntityTypeMapping TypeName="MahasiswaDBModel.Masterdata">
+              <MappingFragment StoreEntitySet="Masterdata">
+                <ScalarProperty Name="MasterdataID" ColumnName="MasterdataID" />
+                <ScalarProperty Name="MahasiswaID" ColumnName="MahasiswaID" />
+                <ScalarProperty Name="FalkutasID" ColumnName="FalkutasID" />
+                <ScalarProperty Name="JurusanID" ColumnName="JurusanID" />
+                <ScalarProperty Name="MatakuliahID" ColumnName="MatakuliahID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matakuliahs">
+            <EntityTypeMapping TypeName="MahasiswaDBModel.Matakuliah">
+              <MappingFragment StoreEntitySet="Matakuliah">
+                <ScalarProperty Name="MatakuliahID" ColumnName="MatakuliahID" />
+                <ScalarProperty Name="Nama_matakuliah" ColumnName="Nama_matakuliah" />
+                <ScalarProperty Name="Sks" ColumnName="Sks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MahasiswaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Falkuta">
+    <Key>
+      <PropertyRef Name="FalkutasID" />
+    </Key>
+    <Property Name="FalkutasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_falkutas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nama_falkutas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Falkutas_FalkutasID" FromRole="Falkutas" ToRole="Masterdata" />
+  </EntityType>
+  <EntityType Name="Jurusan">
+    <Key>
+      <PropertyRef Name="JurusanID" />
+    </Key>
+    <Property Name="JurusanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_jurusan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nama_Jurusan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Jurusan_JurusanID" FromRole="Jurusan" ToRole="Masterdata" />
+  </EntityType>
+  <EntityType Name="Mahasiswa">
+    <Key>
+      <PropertyRef Name="MahasiswaID" />
+    </Key>
+    <Property Name="MahasiswaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_mhs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nama_mhs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id_falkutas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id_jurusan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID" FromRole="Mahasiswa" ToRole="Masterdata" />
+  </EntityType>
+  <EntityType Name="Masterdata">
+    <Key>
+      <PropertyRef Name="MasterdataID" />
+    </Key>
+    <Property Name="MasterdataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MahasiswaID" Type="Int32" />
+    <Property Name="FalkutasID" Type="Int32" />
+    <Property Name="JurusanID" Type="Int32" />
+    <Property Name="MatakuliahID" Type="Int32" />
+    <NavigationProperty Name="Falkuta" Relationship="Self.FK_dbo_Masterdata_dbo_Falkutas_FalkutasID" FromRole="Masterdata" ToRole="Falkutas" />
+    <NavigationProperty Name="Jurusan" Relationship="Self.FK_dbo_Masterdata_dbo_Jurusan_JurusanID" FromRole="Masterdata" ToRole="Jurusan" />
+    <NavigationProperty Name="Mahasiswa" Relationship="Self.FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID" FromRole="Masterdata" ToRole="Mahasiswa" />
+    <NavigationProperty Name="Matakuliah" Relationship="Self.FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID" FromRole="Masterdata" ToRole="Matakuliah" />
+  </EntityType>
+  <EntityType Name="Matakuliah">
+    <Key>
+      <PropertyRef Name="MatakuliahID" />
+    </Key>
+    <Property Name="MatakuliahID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nama_matakuliah" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Masterdatas" Relationship="Self.FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID" FromRole="Matakuliah" ToRole="Masterdata" />
+  </EntityType>
+  <Association Name="FK_dbo_Masterdata_dbo_Falkutas_FalkutasID">
+    <End Role="Falkutas" Type="Self.Falkuta" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Falkutas">
+        <PropertyRef Name="FalkutasID" />
+      </Principal>
+      <Dependent Role="Masterdata">
+        <PropertyRef Name="FalkutasID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Masterdata_dbo_Jurusan_JurusanID">
+    <End Role="Jurusan" Type="Self.Jurusan" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jurusan">
+        <PropertyRef Name="JurusanID" />
+      </Principal>
+      <Dependent Role="Masterdata">
+        <PropertyRef Name="JurusanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID">
+    <End Role="Mahasiswa" Type="Self.Mahasiswa" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mahasiswa">
+        <PropertyRef Name="MahasiswaID" />
+      </Principal>
+      <Dependent Role="Masterdata">
+        <PropertyRef Name="MahasiswaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID">
+    <End Role="Matakuliah" Type="Self.Matakuliah" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Masterdata" Type="Self.Masterdata" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Matakuliah">
+        <PropertyRef Name="MatakuliahID" />
+      </Principal>
+      <Dependent Role="Masterdata">
+        <PropertyRef Name="MatakuliahID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MahasiswaDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Falkutas" EntityType="Self.Falkuta" />
+    <EntitySet Name="Jurusans" EntityType="Self.Jurusan" />
+    <EntitySet Name="Mahasiswas" EntityType="Self.Mahasiswa" />
+    <EntitySet Name="Masterdatas" EntityType="Self.Masterdata" />
+    <EntitySet Name="Matakuliahs" EntityType="Self.Matakuliah" />
+    <AssociationSet Name="FK_dbo_Masterdata_dbo_Falkutas_FalkutasID" Association="Self.FK_dbo_Masterdata_dbo_Falkutas_FalkutasID">
+      <End Role="Falkutas" EntitySet="Falkutas" />
+      <End Role="Masterdata" EntitySet="Masterdatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Masterdata_dbo_Jurusan_JurusanID" Association="Self.FK_dbo_Masterdata_dbo_Jurusan_JurusanID">
+      <End Role="Jurusan" EntitySet="Jurusans" />
+      <End Role="Masterdata" EntitySet="Masterdatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID" Association="Self.FK_dbo_Masterdata_dbo_Mahasiswa_MahasiswaID">
+      <End Role="Mahasiswa" EntitySet="Mahasiswas" />
+      <End Role="Masterdata" EntitySet="Masterdatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID" Association="Self.FK_dbo_Masterdata_dbo_Matakuliah_MatakuliahID">
+      <End Role="Matakuliah" EntitySet="Matakuliahs" />
+      <End Role="Masterdata" EntitySet="Masterdatas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

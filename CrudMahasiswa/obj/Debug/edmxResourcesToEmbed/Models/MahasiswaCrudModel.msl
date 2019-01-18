@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MahasiswaDBModelStoreContainer" CdmEntityContainer="MahasiswaDBEntities">
+    <EntitySetMapping Name="Falkutas">
+      <EntityTypeMapping TypeName="MahasiswaDBModel.Falkuta">
+        <MappingFragment StoreEntitySet="Falkutas">
+          <ScalarProperty Name="FalkutasID" ColumnName="FalkutasID" />
+          <ScalarProperty Name="Id_falkutas" ColumnName="Id_falkutas" />
+          <ScalarProperty Name="Nama_falkutas" ColumnName="Nama_falkutas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jurusans">
+      <EntityTypeMapping TypeName="MahasiswaDBModel.Jurusan">
+        <MappingFragment StoreEntitySet="Jurusan">
+          <ScalarProperty Name="JurusanID" ColumnName="JurusanID" />
+          <ScalarProperty Name="Id_jurusan" ColumnName="Id_jurusan" />
+          <ScalarProperty Name="Nama_Jurusan" ColumnName="Nama_Jurusan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mahasiswas">
+      <EntityTypeMapping TypeName="MahasiswaDBModel.Mahasiswa">
+        <MappingFragment StoreEntitySet="Mahasiswa">
+          <ScalarProperty Name="MahasiswaID" ColumnName="MahasiswaID" />
+          <ScalarProperty Name="Id_mhs" ColumnName="Id_mhs" />
+          <ScalarProperty Name="Nama_mhs" ColumnName="Nama_mhs" />
+          <ScalarProperty Name="Id_falkutas" ColumnName="Id_falkutas" />
+          <ScalarProperty Name="Id_jurusan" ColumnName="Id_jurusan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Masterdatas">
+      <EntityTypeMapping TypeName="MahasiswaDBModel.Masterdata">
+        <MappingFragment StoreEntitySet="Masterdata">
+          <ScalarProperty Name="MasterdataID" ColumnName="MasterdataID" />
+          <ScalarProperty Name="MahasiswaID" ColumnName="MahasiswaID" />
+          <ScalarProperty Name="FalkutasID" ColumnName="FalkutasID" />
+          <ScalarProperty Name="JurusanID" ColumnName="JurusanID" />
+          <ScalarProperty Name="MatakuliahID" ColumnName="MatakuliahID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Matakuliahs">
+      <EntityTypeMapping TypeName="MahasiswaDBModel.Matakuliah">
+        <MappingFragment StoreEntitySet="Matakuliah">
+          <ScalarProperty Name="MatakuliahID" ColumnName="MatakuliahID" />
+          <ScalarProperty Name="Nama_matakuliah" ColumnName="Nama_matakuliah" />
+          <ScalarProperty Name="Sks" ColumnName="Sks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

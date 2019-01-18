@@ -1,0 +1,98 @@
+﻿@model CrudMahasiswa.Models.Mahasiswa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Mahasiswa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_mhs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_mhs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nama_mhs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nama_mhs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_falkutas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_falkutas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_jurusan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_jurusan)
+        </dd>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Id_mhs
+                </th>
+                <th>
+                    Nama_falkutas
+                </th>
+                <th>
+                    Nama_Jurusan
+                </th>
+                <th>
+                    Nama_mhs
+                </th>
+                <th>
+                    Nama_matakuliah
+                </th>
+                <th>
+                    Sks
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Masterdatas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mahasiswa.Id_mhs)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Falkuta.Nama_falkutas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Jurusan.Nama_Jurusan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mahasiswa.Nama_mhs)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Matakuliah.Nama_matakuliah)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Matakuliah.Sks)
+                    </td>
+                    </tr>
+                    }
+</table>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MahasiswaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

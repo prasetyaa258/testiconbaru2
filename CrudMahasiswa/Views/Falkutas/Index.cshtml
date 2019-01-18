@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CrudMahasiswa.Models.Falkuta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_falkutas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nama_falkutas)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_falkutas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nama_falkutas)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FalkutasID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FalkutasID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FalkutasID })
+        </td>
+    </tr>
+}
+
+</table>

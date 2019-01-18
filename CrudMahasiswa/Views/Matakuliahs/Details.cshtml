@@ -1,0 +1,34 @@
+﻿@model CrudMahasiswa.Models.Matakuliah
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Matakuliah</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nama_matakuliah)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nama_matakuliah)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MatakuliahID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

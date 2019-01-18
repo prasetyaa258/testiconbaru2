@@ -1,0 +1,40 @@
+﻿@model CrudMahasiswa.Models.Matakuliah
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Matakuliah</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nama_matakuliah)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nama_matakuliah)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sks)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
